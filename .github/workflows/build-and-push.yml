@@ -14,8 +14,6 @@ on:
   pull_request:
     branches: [ "master" ]
 
-env:
-  REGISTRY: $REGISTRY
 
 jobs:
   build:
