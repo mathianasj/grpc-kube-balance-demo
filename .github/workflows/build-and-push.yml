@@ -39,7 +39,7 @@ jobs:
       working-directory: ./backend-service
     - name: Build image
       working-directory: ./backend-service
-      run: docker build -f src/main/docker/Dockerfile.native-micro -t quay.io/mathianasj/grpc-kube-balance-backend-service .
+      run: docker build -f src/main/docker/Dockerfile.native -t quay.io/mathianasj/grpc-kube-balance-backend-service .
     - name: Push image
       run: docker push quay.io/mathianasj/grpc-kube-balance-backend-service
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
