@@ -18,5 +18,5 @@ COPY --from=build --chown=185 /app/target/quarkus-app/quarkus/ /deployments/quar
 
 EXPOSE 8080
 USER 185
-ENV JAVA_OPTS="-Dquarkus.http.host=0.0.0.0 -Dquarkus.http.port=${PORT} -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
-ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
+
+ENTRYPOINT [ "java", "-Dquarkus.http.host=0.0.0.0", "-Dquarkus.http.port=${PORT}", "-Djava.util.logging.manager=org.jboss.logmanager.LogManager", "-XX:MaxRAMPercentage=50.0", "-XX:+UseParallelGC", "-XX:MinHeapFreeRatio=10", "-XX:MaxHeapFreeRatio=20", "-XX:GCTimeRatio=4", "-XX:AdaptiveSizePolicyWeight=90", "-XX:+ExitOnOutOfMemoryError", "-cp", ".", "-jar", "/deployments/quarkus-run.jar" ]
