@@ -5,7 +5,8 @@ RUN ls /app
 RUN ./mvnw package
 
 FROM registry.access.redhat.com/ubi8/openjdk-17:1.16
-
+ARG PORT
+ENV PORT=${PORT}
 ENV LANGUAGE='en_US:en'
 
 
@@ -17,7 +18,5 @@ COPY --from=build --chown=185 /app/target/quarkus-app/quarkus/ /deployments/quar
 
 EXPOSE 8080
 USER 185
-ARG PORT
-ENV PORT=${PORT}
-ENV JAVA_OPTS="-Dquarkus.http.host=0.0.0.0 -Dquarkus.http.port=$PORT -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
+ENV JAVA_OPTS="-Dquarkus.http.host=0.0.0.0 -Dquarkus.http.port=${PORT} -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
 ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
