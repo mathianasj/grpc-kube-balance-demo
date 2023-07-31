@@ -1,6 +1,7 @@
 FROM ghcr.io/graalvm/jdk-community:20.0.1-ol9 AS build
 COPY . /app
 WORKDIR /app
+RUN ls .
 RUN ./mvnw package -Pnative
 
 FROM quay.io/quarkus/quarkus-micro-image:2.0
