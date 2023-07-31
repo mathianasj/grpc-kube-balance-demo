@@ -17,5 +17,7 @@ COPY --from=build --chown=185 /app/target/quarkus-app/quarkus/ /deployments/quar
 
 EXPOSE 8080
 USER 185
-ENV JAVA_OPTS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
+ARG PORT
+ENV PORT=${PORT}
+ENV JAVA_OPTS="-Dquarkus.http.host=0.0.0.0 -Dquarkus.http.port=$PORT -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
 ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
