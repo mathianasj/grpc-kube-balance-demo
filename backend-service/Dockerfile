@@ -1,8 +1,8 @@
 FROM ghcr.io/graalvm/jdk-community:20.0.1-ol9 AS build
 COPY . /app
 WORKDIR /app
-RUN ls .
-RUN ./mvnw package -Pnative
+RUN pwd && ls . && ls /app
+RUN /app/mvnw package -Pnative
 
 FROM quay.io/quarkus/quarkus-micro-image:2.0
 ARG PORT
