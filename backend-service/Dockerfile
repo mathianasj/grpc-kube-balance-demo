@@ -1,6 +1,5 @@
 FROM ghcr.io/graalvm/jdk-community:20.0.1-ol9 AS build
-RUN mkdir /app
-COPY . /app
+COPY . /build
 WORKDIR /app
 RUN pwd && ls . && ls /app
 RUN /app/mvnw package -Pnative
