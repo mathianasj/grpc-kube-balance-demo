@@ -35,7 +35,19 @@ public class HelloService implements Greeter {
 
     @Override
     public Multi<LoadReply> listenToLoad(EmptyRequest request) {
+        InetAddress inetAddress;
+        try {
+            inetAddress = InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
+
         return Multi.createFrom().ticks().every(Duration.ofSeconds(5))
-            .select().when(e -> Uni.createFrom().item(true)).map(l -> LoadReply.newBuilder().setLoad(loadService.getLoad()).build());
+            .select().when(e -> Uni.createFrom().item(true)).map(l -> 
+            LoadReply.newBuilder()
+                .setLoad(loadService.getLoad())
+                .setHostname(inetAddress.getHostName())
+            .build()
+        );
     }
 }
