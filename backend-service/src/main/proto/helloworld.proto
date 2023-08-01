@@ -25,6 +25,7 @@ message HelloReply {
 
 message LoadReply {
     int32 load = 1;
+    string hostname = 2;
 }
 
 message EmptyRequest {}
