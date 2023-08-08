@@ -7,6 +7,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 @Path("/load")
 public class LoadResource {
@@ -15,8 +16,9 @@ public class LoadResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public Integer getLoad() {
-        return loadService.getLoad();
+    public Response getLoad() {
+        Integer load = loadService.getLoad();
+        return Response.ok(loadService.getLoad()).tag(Integer.toString(load)).build();
     }
 
     @POST
